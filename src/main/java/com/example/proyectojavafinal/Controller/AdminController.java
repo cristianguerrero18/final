@@ -20,13 +20,14 @@ public class AdminController {
         return "login";
     }
 
-    @PostMapping("/admin/validar")
+   @PostMapping("/admin/validar")
     public String validarUsuario(String correo, String contrasena, Model model) {
         Usuario usuario = usuarioRepository.findByCorreoAndContrasena(correo, contrasena);
         if (usuario != null && usuario.getRol().getDescripcion().equalsIgnoreCase("admin")) {
+            usuarioAutenticadoService.setCorreoAutenticado(correo); // Guardar el correo autenticado
             return "redirect:/admin/menu";
         } else if (usuario != null) {
-            model.addAttribute("mensaje", "Acceso restringido. Solo para administradores.");
+            model.addAttribute("mensaje", "Acceso restringido. Solo para Administradores.");
         } else {
             model.addAttribute("mensaje", "Credenciales incorrectas.");
         }
