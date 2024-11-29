@@ -89,7 +89,7 @@ public class OrdenController {
         }
 
         model.addAttribute("ordenes", ordenServicioRepository.findByUsuario(cliente));
-        return "verOrden";
+        return "VerOrden";
     }
 
     // Editar orden existente
